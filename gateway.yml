@@ -13,12 +13,12 @@ spring:
         - Path=/booksvc/**
         filters:
         - StripPrefix=1
-#      - id: rating-svc
-#        uri: lb://rating-service
-#        predicates:
-#        - Path=/ratingsvc/**
-#        filters:
-#        - StripPrefix=1
+      - id: rating-svc
+        uri: lb://rating-service
+        predicates:
+        - Path=/ratingsvc/**
+        filters:
+        - StripPrefix=1
     # config:
     #   import-check:
     #     enabled: false
