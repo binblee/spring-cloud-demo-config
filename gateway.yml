@@ -1,0 +1,39 @@
+server:
+  port: 8123
+
+spring:
+  application:
+    name: gateway  
+  cloud:
+    config:
+      enabled: false
+    gateway:
+      routes:
+      - id: book-svc
+        uri: lb://book-service
+        predicates:
+        - Path=/book-svc/**
+        filters:
+        - StripPrefix=1
+
+# info:
+#   app:
+#     name: ${spring.application.name}
+
+eureka:
+  client:
+    registerWithEureka: true
+    serviceUrl: 
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+    healthcheck:
+      enabled: true
+
+# management:
+#   endpoints:
+#     web:
+#       exposure:
+#         include:
+#           - mappings
+#           - env
+#           - health
+#           - info
