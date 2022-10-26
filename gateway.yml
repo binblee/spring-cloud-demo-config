@@ -4,33 +4,40 @@ server:
 spring:
   application:
     name: gateway  
+  cloud:
     gateway:
       routes:
       - id: book-svc
         uri: lb://book-service
         predicates:
-        - Path=/book-svc/**
+        - Path=/booksvc/**
         filters:
         - StripPrefix=1
-
-# info:
-#   app:
-#     name: ${spring.application.name}
+    # config:
+    #   import-check:
+    #     enabled: false
 
 eureka:
   client:
     registerWithEureka: true
-    serviceUrl: 
-      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+    # serviceUrl: 
+    #   defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
     healthcheck:
       enabled: true
 
-# management:
-#   endpoints:
-#     web:
-#       exposure:
-#         include:
-#           - mappings
-#           - env
-#           - health
-#           - info
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - mappings
+          - env
+          - health
+          - info
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: ${spring.application.name}
