@@ -40,6 +40,7 @@ management:
           - env
           - health
           - info
+          - refresh
   info:
     env:
       enabled: true
